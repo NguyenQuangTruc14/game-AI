@@ -1,20 +1,33 @@
 package Models;
 
+import Models.Enum.HieuUngChieuThuc;
+
 import java.util.Objects;
 
 public class ChieuThuc {
     private String ten;
     private String hieuUngChieuThuc;
+    private String kieuChieuThuc;
     private int chiSo;
     private int coolDown;
     private int currentCooldown;
 
-    public ChieuThuc(String ten, String hieuUngChieuThuc, int chiSo, int coolDown) {
+    public ChieuThuc(String ten, String hieuUngChieuThuc, String kieuChieuThuc, int chiSo, int coolDown) {
         this.ten = ten;
         this.hieuUngChieuThuc = hieuUngChieuThuc;
+        this.kieuChieuThuc = kieuChieuThuc;
         this.chiSo = chiSo;
         this.coolDown = Math.max(0, coolDown);
         this.currentCooldown = 0;
+    }
+
+    public ChieuThuc(ChieuThuc other) {
+        this.ten = other.ten;
+        this.hieuUngChieuThuc = other.hieuUngChieuThuc;
+        this.kieuChieuThuc = other.kieuChieuThuc;
+        this.chiSo = other.chiSo;
+        this.coolDown = other.coolDown;
+        this.currentCooldown = other.currentCooldown;
     }
 
     public boolean isAvailable() {
@@ -35,6 +48,14 @@ public class ChieuThuc {
 
     public int executeEffect() {
         return chiSo;
+    }
+
+    public String getKieuChieuThuc() {
+        return kieuChieuThuc;
+    }
+
+    public void setKieuChieuThuc(String kieuChieuThuc) {
+        this.kieuChieuThuc = kieuChieuThuc;
     }
 
     // Getters / Setters

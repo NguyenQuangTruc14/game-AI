@@ -1,10 +1,12 @@
 package Views;
 
+import Models.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ViewStart extends JFrame {
-    public ViewStart() {
+    public ViewStart(Game game) {
         super("last turn");
 
 
@@ -15,6 +17,7 @@ public class ViewStart extends JFrame {
         JPanel boxTitle = new JPanel();
         JLabel title = new JLabel("LAST TURN");
         title.setFont(new Font("Tahoma", 1, 30));
+        title.setForeground(Color.RED);
         boxTitle.add(title);
         boxMain.add(boxTitle);
 
@@ -22,6 +25,7 @@ public class ViewStart extends JFrame {
         JPanel boxHuongDan = new JPanel();
         JLabel huongDanTitle = new JLabel("Hướng dẫn: ");
         huongDanTitle.setFont(new Font("Tahoma", 1, 24));
+        huongDanTitle.setForeground(Color.BLUE);
         boxHuongDan.add(huongDanTitle);
 
         // text hướng dẫn dòng một
@@ -56,7 +60,7 @@ public class ViewStart extends JFrame {
 
         // text hướng dẫn dòng 5
         JLabel huongDan6 = new JLabel();
-        huongDan6.setText("mỗi chiêu thức sẽ có một hiệu ứng như: đóng băng, giảm dame, giảm hồi máu");
+        huongDan6.setText("Mỗi chiêu thức sẽ có một hiệu ứng như: đóng băng, giảm dame, giảm hồi máu");
         huongDan6.setFont(new Font("Tahoma", 1, 18));
         boxHuongDan.add(huongDan6);
 
@@ -74,10 +78,15 @@ public class ViewStart extends JFrame {
         boxBt.add(btnStart);
         boxMain.add(boxBt);
 
-
+        btnStart.addActionListener(e -> {
+            dispose();
+            new ViewGame(game);
+        });
 
         add(boxMain);
-        setSize(900, 700);
+        setSize(900, 720);
+        // size cố định
+        setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
