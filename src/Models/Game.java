@@ -7,9 +7,6 @@ public class Game {
     private Player player;
     private Player ai; // ở diagram là AI; ở đây tạm dùng Player cho đơn giản
     private int round;
-
-
-
     private int nguoiTanCong;
     // Danh sách tất cả chiêu trong game (id -> chiêu) nếu cần quản lý trung tâm
     private Map<Integer, ChieuThuc> listAllChieuThuc;
@@ -60,11 +57,5 @@ public class Game {
 
     public void setNguoiTanCong(int nguoiTanCong) {
         this.nguoiTanCong = nguoiTanCong;
-    }
-
-
-
-    public static Game newGame() {
-        return null;
     }
 }

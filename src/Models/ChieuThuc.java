@@ -10,7 +10,6 @@ public class ChieuThuc {
     private String kieuChieuThuc;
     private int chiSo;
     private int coolDown;
-    private int currentCooldown;
 
     public ChieuThuc(String ten, String hieuUngChieuThuc, String kieuChieuThuc, int chiSo, int coolDown) {
         this.ten = ten;
@@ -18,7 +17,7 @@ public class ChieuThuc {
         this.kieuChieuThuc = kieuChieuThuc;
         this.chiSo = chiSo;
         this.coolDown = Math.max(0, coolDown);
-        this.currentCooldown = 0;
+
     }
 
     public ChieuThuc(ChieuThuc other) {
@@ -27,24 +26,8 @@ public class ChieuThuc {
         this.kieuChieuThuc = other.kieuChieuThuc;
         this.chiSo = other.chiSo;
         this.coolDown = other.coolDown;
-        this.currentCooldown = other.currentCooldown;
     }
 
-    public boolean isAvailable() {
-        return currentCooldown == 0;
-    }
-
-    public boolean use() {
-        if (!isAvailable())
-            return false;
-        this.currentCooldown = this.coolDown;
-        return true;
-    }
-
-    public void tickCooldown() {
-        if (currentCooldown > 0)
-            currentCooldown--;
-    }
 
     public int executeEffect() {
         return chiSo;
@@ -91,14 +74,10 @@ public class ChieuThuc {
         this.coolDown = Math.max(0, coolDown);
     }
 
-    public int getCurrentCooldown() {
-        return currentCooldown;
-    }
-
     @Override
     public String toString() {
         return "ChieuThuc{" + "ten='" + ten + '\'' + ", hieuUng='" + hieuUngChieuThuc + '\'' + ", chiSo=" + chiSo
-                + ", coolDown=" + coolDown + ", currentCooldown=" + currentCooldown + '}';
+                + ", coolDown=" + coolDown + '}';
     }
 
     @Override

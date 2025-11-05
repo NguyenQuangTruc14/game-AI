@@ -33,38 +33,6 @@ public class Player {
 //        listAllChieuThucDich.put(id, chieu);
 //    }
 
-    // Dùng chiêu của bản thân vào mục tiêu (đơn giản: trừ máu = chiSo -
-    // target.giap, tối thiểu 0)
-    // Trả về lượng sát thương thực tế gây ra, hoặc -1 nếu chiêu không thể dùng
-    public int useChieuThucOnTarget(int chiieuId, Player target) {
-        ChieuThuc ct = listAllChieuThucTa.get(chiieuId);
-        if (ct == null)
-            return -1;
-        if (!ct.isAvailable())
-            return -1;
-        boolean used = ct.use();
-        if (!used)
-            return -1;
-        int dmg = ct.executeEffect();
-        int effective = Math.max(0, dmg - target.getGiap());
-        target.takeDamage(effective);
-        return effective;
-    }
-
-    // Nhận sát thương
-    public void takeDamage(int damage) {
-        if (damage <= 0)
-            return;
-        this.mau = Math.max(0, this.mau - damage);
-    }
-
-    // Tick cooldown cho toàn bộ chiêu của người chơi (gọi mỗi round)
-    public void tickAllCooldowns() {
-        for (ChieuThuc ct : listAllChieuThucTa.values())
-            ct.tickCooldown();
-        for (ChieuThuc ct : listAllChieuThucDich.values())
-            ct.tickCooldown();
-    }
 
     // Getters/Setters
     public int getMau() {
