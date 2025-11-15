@@ -149,6 +149,7 @@ public class DungChieuController {
     public Game aiDungChieu(Game game) {
         SeviceAi seviceAi = new SeviceAi();
 
+        // lấy danh sách chiêu thức đã hết hồi chiêu của AI
         Map<Integer, ChieuThuc> listChieuThucCoTheDung = new HashMap<>();
         for (int i = 0; i < game.getAi().getListAllChieuThucTa().size(); i++) {
             if (game.getAi().getListAllChieuThucTa().get(i).getCoolDown() == 0) {
@@ -157,8 +158,9 @@ public class DungChieuController {
         }
 
         // chiêu thức ai dùng để tối ưu chiến thắng
-        ChieuThuc chieuThucDuocChon = seviceAi.chonChieuThuc(listChieuThucCoTheDung);
+        ChieuThuc chieuThucDuocChon = seviceAi.chonChieuThuc(listChieuThucCoTheDung, game);
         game.getAi().setChieuAiVuaDung(chieuThucDuocChon);
+        // lấy vi trí index của chiêu được chọn trong danh sách chiêu thức
         int indexChieuThuc = -1;
         for (int i = 0; i < game.getAi().getListAllChieuThucTa().size(); i++) {
             if (game.getAi().getListAllChieuThucTa().get(i).equals(chieuThucDuocChon)) {
@@ -167,6 +169,7 @@ public class DungChieuController {
             }
         }
 
+        // dùng thanh tẩy nếu AI chọn chiêu thanh tẩy
         if (indexChieuThuc == game.getAi().getListAllChieuThucTa().size() - 1) {
             return thanhTayController.aiThanhTay(game);
         }
@@ -289,7 +292,7 @@ public class DungChieuController {
             }
         }
 
-
+        // trả về đối tượng là game chưa các thông số mới sau khi AI dùng chiêu của ta và AI
         Game newGame = new Game(ta, ai);
         newGame.setRound(game.getRound());
         newGame.setNguoiTanCong(game.getNguoiTanCong());

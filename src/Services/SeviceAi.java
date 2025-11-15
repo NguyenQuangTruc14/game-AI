@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class SeviceAi {
-    public ChieuThuc chonChieuThuc(Map<Integer, ChieuThuc> listAllChieuThuc) {
+    public ChieuThuc chonChieuThuc(Map<Integer, ChieuThuc> listAllChieuThuc, Game game) {
         // random số int từ 0 đến 6
         Random random = new Random();
         List<ChieuThuc> listChieuThuc = List.copyOf(listAllChieuThuc.values());

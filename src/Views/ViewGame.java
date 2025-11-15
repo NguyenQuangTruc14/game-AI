@@ -19,10 +19,11 @@ public class ViewGame extends JFrame {
     public ViewGame(Game game) {
         super("Game");
 
-        DungChieuController controller = new DungChieuController();
+        DungChieuController dungChieuController = new DungChieuController();
         KiemTraGameOverController kiemTraGameOverController = new KiemTraGameOverController();
         ExitLuotChoiController exitLuotChoiController = new ExitLuotChoiController();
         ThanhTayController thanhTayController = new ThanhTayController();
+        // kiểm tra game over
         if (game.getAi().getMau() == 0) {
             dispose();
             new ViewGameOver("bạn");
@@ -33,6 +34,7 @@ public class ViewGame extends JFrame {
             new ViewGameOver("AI");
             return;
         }
+        // nếu người tấn công là 0 thì lược tấn công đó thuộc về AI
         if (game.getNguoiTanCong() == 0) {
             if (game.getAi().getTrangThai().equals(TrangThaiPlayer.CHOANG.name())) {
                 if (game.getAi().getListAllChieuThucTa().get(6).getCoolDown() == 0) {
@@ -59,7 +61,7 @@ public class ViewGame extends JFrame {
 
 
             }
-            Game newGame = controller.aiDungChieu(game);
+            Game newGame = dungChieuController.aiDungChieu(game);
             dispose();
             new ViewGame(newGame);
             return;
@@ -221,7 +223,7 @@ public class ViewGame extends JFrame {
 //                            return;
 //
 //                        } else {
-                            Game newGame = controller.taDungChieu(game, index);
+                            Game newGame = dungChieuController.taDungChieu(game, index);
                             dispose();
                             new ViewGame(newGame);
                             return;
